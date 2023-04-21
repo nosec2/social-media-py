@@ -10,9 +10,6 @@ def login():
 def register():
     pass
 
-def post():
-    pass
-
 app = tk.Tk()
 app.title("Social Media App")
 app.geometry("800x600")
