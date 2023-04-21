@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import create
-import post
+from post import create_post
 
 def login():
     login_frame.grid_forget()
@@ -51,7 +51,8 @@ post_label.grid(row=0, column=1, padx=10, pady=10)
 post_text = tk.Text(main_frame, height=5, width=30)
 post_text.grid(row=1, column=1, padx=10, pady=10)
 
-post_button = ttk.Button(main_frame, text="Post", command=post)
+
+post_button = ttk.Button(main_frame, text="Post", command=lambda: create_post(post_text.get("1.0", "end-1c"), feed_listbox))
 post_button.grid(row=2, column=1, padx=10, pady=10)
 
 # Profile
