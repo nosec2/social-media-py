@@ -1,9 +1,11 @@
 import tkinter as tk
 from tkinter import ttk
+import create
+import post
 
 def login():
-    login_frame.place_forget()
-    main_frame.place(x=0, y=0, width=800, height=600)
+    login_frame.grid_forget()
+    main_frame.grid(row=0, column=0, sticky="nsew")
 
 def register():
     pass
@@ -17,7 +19,7 @@ app.geometry("800x600")
 
 # Login Screen
 login_frame = ttk.Frame(app)
-login_frame.place(x=300, y=150, width=200, height=300)
+login_frame.grid(row=0, column=0, sticky="nsew")
 
 username_label = ttk.Label(login_frame, text="Username")
 username_label.grid(row=0, column=0, padx=10, pady=10)
@@ -37,7 +39,6 @@ register_button.grid(row=3, columnspan=2, padx=10, pady=10)
 
 # Main Screen
 main_frame = ttk.Frame(app)
-main_frame.place(x=0, y=0, width=800, height=600)
 
 # Feed
 feed_label = ttk.Label(main_frame, text="Feed")
@@ -64,6 +65,12 @@ profile_details = ttk.Label(main_frame, text="Profile Details")
 profile_details.grid(row=1, column=2, padx=10, pady=10)
 
 # Hide the main_frame by default
-main_frame.place_forget()
+main_frame.grid_forget()
+
+# Set up grid for frames
+app.columnconfigure(0, weight=1)
+app.rowconfigure(0, weight=1)
+main_frame.columnconfigure((0, 1, 2), weight=1)
+main_frame.rowconfigure(1, weight=1)
 
 app.mainloop()
