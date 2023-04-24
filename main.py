@@ -5,16 +5,23 @@ from post import create_post
 
 def login():
     login_frame.grid_forget()
-    main_frame.grid(row=0, column=0, sticky="nsew")
+    feed_frame.grid(row=0, column=0, sticky="nsew")
 
 def register():
     pass
+
+def show_post_frame():
+    feed_frame.grid_forget()
+    post_frame.grid(row=0, column=0, sticky="nsew")
+
+def show_feed_frame():
+    post_frame.grid_forget()
+    feed_frame.grid(row=0, column=0, sticky="nsew")
 
 app = tk.Tk()
 app.title("Social Media App")
 app.geometry("800x600")
 
-# Login Screen
 login_frame = ttk.Frame(app)
 login_frame.grid(row=0, column=0, sticky="nsew")
 
@@ -34,41 +41,39 @@ login_button.grid(row=2, columnspan=2, padx=10, pady=10)
 register_button = ttk.Button(login_frame, text="Register", command=register)
 register_button.grid(row=3, columnspan=2, padx=10, pady=10)
 
-# Main Screen
-main_frame = ttk.Frame(app)
+feed_frame = ttk.Frame(app)
 
-# Feed
-feed_label = ttk.Label(main_frame, text="Feed")
+feed_label = ttk.Label(feed_frame, text="Feed")
 feed_label.grid(row=0, column=0, padx=10, pady=10)
 
-feed_listbox = tk.Listbox(main_frame, width=50, height=33)  # Adjusted width and height
+feed_listbox = tk.Listbox(feed_frame, width=50, height=33)
 feed_listbox.grid(row=1, column=0, padx=10, pady=10)
 
-# Post creation
-post_label = ttk.Label(main_frame, text="Create Post")
-post_label.grid(row=0, column=1, padx=10, pady=10)
+to_post_button = ttk.Button(feed_frame, text="Create Post", command=show_post_frame)
+to_post_button.grid(row=2, column=0, padx=10, pady=10)
 
-post_text = tk.Text(main_frame, height=5, width=30)
-post_text.grid(row=1, column=1, padx=10, pady=10)
+post_frame = ttk.Frame(app)
 
+post_label = ttk.Label(post_frame, text="Create Post")
+post_label.grid(row=0, column=0, padx=10, pady=10)
 
-post_button = ttk.Button(main_frame, text="Post", command=lambda: create_post(post_text.get("1.0", "end-1c"), feed_listbox))
-post_button.grid(row=2, column=1, padx=10, pady=10)
+post_text = tk.Text(post_frame, height=5, width=30)
+post_text.grid(row=1, column=0, padx=10, pady=10)
 
-# Profile
-profile_label = ttk.Label(main_frame, text="Profile")
-profile_label.grid(row=0, column=2, padx=10, pady=10)
+post_button = ttk.Button(post_frame, text="Post", command=lambda: create_post(post_text.get("1.0", "end-1c"), feed_listbox))
+post_button.grid(row=2, column=0, padx=10, pady=10)
 
-profile_details = ttk.Label(main_frame, text="Profile Details")
-profile_details.grid(row=1, column=2, padx=10, pady=10)
+to_feed_button = ttk.Button(post_frame, text="Back to Feed", command=show_feed_frame)
+to_feed_button.grid(row=3, column=0, padx=10, pady=10)
 
-# Hide the main_frame by default
-main_frame.grid_forget()
+feed_frame.grid_forget()
+post_frame.grid_forget()
 
-# Set up grid for frames
 app.columnconfigure(0, weight=1)
 app.rowconfigure(0, weight=1)
-main_frame.columnconfigure((0, 1, 2), weight=1)
-main_frame.rowconfigure(1, weight=1)
+feed_frame.columnconfigure(0, weight=1)
+feed_frame.rowconfigure(1, weight=1)
+post_frame.columnconfigure(0, weight=1)
+post_frame.rowconfigure(1, weight=1)
 
 app.mainloop()
