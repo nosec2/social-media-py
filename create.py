@@ -25,3 +25,7 @@ print(users)
 
     #Write username and password to file, make sure credentials arent already used.
     pass
+
+
+#with open(file_name, 'a') as file:
+#    file.write(content)
