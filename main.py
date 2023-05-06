@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import create
-from post import create_post
+from post import create_post, add_friend_ss
 
 def login():
     username = username_entry.get()
@@ -9,6 +9,20 @@ def login():
     feed_frame.grid(row=0, column=0, sticky="nsew")
     feed_label.config(text=f"Welcome, {username}!")
 
+def add_friend():
+    def add_friend_submit():
+        friend_name = friend_entry.get()
+        add_friend_ss(username_entry.get(), friend_name)
+        add_friend_popup.destroy()
+
+    add_friend_popup = tk.Toplevel()
+    add_friend_popup.title("Add Friend")
+    friend_label = ttk.Label(add_friend_popup, text="Friend's Name")
+    friend_label.pack(pady=10)
+    friend_entry = ttk.Entry(add_friend_popup)
+    friend_entry.pack(pady=5)
+    submit_button = ttk.Button(add_friend_popup, text="Add Friend", command=add_friend_submit)
+    submit_button.pack(pady=10)
 
 def register():
     pass
@@ -82,6 +96,10 @@ post_frame.grid(row=0, column=0, sticky="nsew")
 
 direct_message_button = ttk.Button(feed_frame, text="Direct Message", command=show_messaging_page)
 direct_message_button.grid(row=3, column=0, padx=10, pady=10)
+
+
+add_friend_button = ttk.Button(feed_frame, text="Add Friend", command=add_friend)
+add_friend_button.grid(row=4, column=0, padx=10, pady=10)
 
 
 
