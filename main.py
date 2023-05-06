@@ -71,7 +71,7 @@ post_label.grid(row=0, column=0, padx=10, pady=10)
 post_text = tk.Text(post_frame, height=5, width=30)
 post_text.grid(row=1, column=0, padx=10, pady=10)
 
-post_button = ttk.Button(post_frame, text="Post", command=lambda: create_post(post_text.get("1.0", "end-1c"), feed_listbox))
+post_button = ttk.Button(post_frame, text="Post", command=lambda: create_post(post_text.get("1.0", "end-1c"), feed_listbox, username_entry.get()))
 post_button.grid(row=2, column=0, padx=10, pady=10)
 
 to_feed_button = ttk.Button(post_frame, text="Back to Feed", command=show_feed_frame)
